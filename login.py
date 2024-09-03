@@ -22,7 +22,7 @@ class RegistroUsuario:
         self.contrasena=contrasena
         self.registrar_usuario()
 
-    def registrar_usuario(self):
+    def registrar_usuario(self, usuario, contrasena):
         global credenciales
         credenciales= credenciales+"\n"+usuario+","+contrasena
         print("Usuario registrado exitosamente")

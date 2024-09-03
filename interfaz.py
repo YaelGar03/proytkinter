@@ -1,7 +1,13 @@
 class InterfazSesion:
     def __init__(self):
-        self.usuario=input("Ingrese su usuario: ")
-        self.contrasena=input("Ingrese su contraseña: ")
+      self.usuario=input("Ingrese su usuario: ")
+      self.contrasena=input("Ingrese su contraseña: ")
+        # Hay que implementarlo como interfaz tkinter
+        
+    def validacion(usuario, contrasena):
+      print(usuario)
+      print(contrasena)
+
 
 
 class Interfaz:
@@ -19,6 +25,8 @@ class Interfaz:
         # Hay que desactivar la barra original,
         # y armar una propia para cambiar colores
 
+        return None
+
 
 class InterfazPrincipal:
     def __init__(self):
@@ -32,6 +40,8 @@ class InterfazPrincipal:
       # llamar cuadro resumen registros
       # llamar total_registros
       # llamar grafico
+      return None
+    
 
 class  InterfazEditarGrupoFamiliar:
     def __init__(self):
@@ -39,18 +49,21 @@ class  InterfazEditarGrupoFamiliar:
       # llamar cuadro miembros del grupo familiar registrados
       # llamar campos para escribir
       # llamar def Botones
+      return None
 
 class  InterfazEditarRegistros:
     def __init__(self):
       # llamar texto
       # llamar cuadro registros
       # llamar def Botones
+      return None
 
     class BorrarRegistros:
       def __init__(self):
         # llamar texto
         # llamar cuadro registros
         # llamar def Botones
+        return None
 
     class EditarRegistros:
       def __init__(self):
@@ -59,4 +72,4 @@ class  InterfazEditarRegistros:
         # llamar lista desplegable
         # llamar campos para escribir
         # llamar def Botones
-
+        return None
