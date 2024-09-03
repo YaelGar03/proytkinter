@@ -1,3 +1,7 @@
+# Nuestros Usuarios de prueba. Esto tendriamos que almacenar en otro lado, no en el código.
+credenciales='''Yael,1234
+Cecilia,5678'''
+
 class InicioSesion:
     def __init__(self, usuario, contrasena):
         self.usuario1 = usuario
@@ -17,16 +21,18 @@ class InicioSesion:
 
 
 class RegistroUsuario:
-    def __init__(self,usuario,contrasena):
-        self.usuario=usuario
-        self.contrasena=contrasena
-        self.registrar_usuario()
-
-    def registrar_usuario(self, usuario, contrasena):
+    def __init__(self, usuario, contrasena):
         global credenciales
-        credenciales= credenciales+"\n"+usuario+","+contrasena
+        credenciales= f"{credenciales}\n{usuario},{contrasena}"
         print("Usuario registrado exitosamente")
-        return credenciales
+        print(credenciales)
+
+    # def registrar_usuario(self):
+    #     global credenciales
+    #     credenciales= f"{credenciales}\n{self.usuario},{self.contrasena}"
+    #     print("Usuario registrado exitosamente")
+    #     print(credenciales)
+    #     return credenciales
 
 
         # Almacenamos en credenciales.txt usuario y contraseña

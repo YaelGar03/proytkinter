@@ -3,9 +3,6 @@
 
 import interfaz, login, manejo_registros
 
-# Nuestros Usuarios de prueba. Esto tendriamos que almacenar en otro lado, no en el código.
-credenciales='''Yael,1234
-              Cecilia,5678'''
 
 
 ### Pantalla de inicio ###
@@ -21,16 +18,15 @@ if registrarse_o_iniciarsesion=="1":
 
   # Se crea una instancia de la clase InicioSesion con los datos ingresados por el usuario en interfaz.py
   # La siguiente linea tendría que enviarse a validar
-  inicio_sesion = interfaz.InterfazSesion.validacion(usuario, contrasena)
+  registro_usuario = login.InicioSesion(usuario, contrasena)
 
 #Para regiustrarse
 if registrarse_o_iniciarsesion=="2":
-  interfaz_registro_usuario = interfaz.InterfazSesion(usuario, contrasena) # Se crea una instancia de la clase interfaz
+  interfaz_registro_usuario = interfaz.InterfazSesion() # Se crea una instancia de la clase interfaz
   usuario = interfaz_registro_usuario.usuario
   contrasena = interfaz_registro_usuario.contrasena
   # Se crea una instancia de la clase InicioSesion con los datos ingresados por el usuario en interfaz.py
-  registro_usuario = interfaz.RegistroUsuario(usuario, contrasena)
-  print(credenciales)
+  registro_usuario = login.RegistroUsuario(usuario, contrasena)
 
 
 
