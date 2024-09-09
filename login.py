@@ -1,19 +1,18 @@
 # Nuestros Usuarios de prueba. Esto tendriamos que almacenar en otro lado, no en el código.
+import interfaz
 credenciales='''Yael,1234
 Cecilia,5678'''
 
 class InicioSesion:
-    def __init__(self, usuario, contrasena):
-        self.usuario1 = usuario
-        self.contrasena1 = contrasena
-        self.validar_credenciales()
+    def __init__(self):
+        pass
 
-    def validar_credenciales(self):
+    def validar_credenciales(self, usuario, contrasena):
         for linea in credenciales.splitlines():
-          usuario, contrasena = linea.strip().split(',')
-          if usuario == self.usuario1 and contrasena == self.contrasena1:
-            print("Inicio de sesión exitoso")
-            return True
+          usuario1, contrasena1 = linea.strip().split(',')
+          if usuario == usuario1 and contrasena == contrasena1:
+              print("Inicio de sesión exitoso")
+              return True
           else:
             print("Inicio de sesión fallido")
             return False
