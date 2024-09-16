@@ -39,10 +39,16 @@ class Interfaz:
         self.frame_ventana.grid(row=0, column=0, padx=10, pady=10)  # Asegura que el frame se expanda
         
         
-        # Configurar las columnas para que se expandan con diferentes pesos
+        # Configurar las columnas para que se expandan con diferentes pesos, 0 = no se expande
         # También asegura que la barra ocupe toda la ventana
-        ventana.grid_columnconfigure(0, weight=1)  # Columna izq
-        ventana.grid_columnconfigure(6, weight=1)  # Columna der
+        
+        self.ventana.grid_columnconfigure(0, weight=0)  # Columna izq
+        self.ventana.grid_columnconfigure(1, weight=0)
+        self.ventana.grid_columnconfigure(2, weight=1)
+        self.ventana.grid_columnconfigure(3, weight=1)
+        self.ventana.grid_columnconfigure(4, weight=0)
+        self.ventana.grid_columnconfigure(5, weight=0)
+        self.ventana.grid_columnconfigure(6, weight=0)  # Columna der
         
         # Eliminar la barra de título estándar
         self.ventana.overrideredirect(1)
@@ -56,11 +62,10 @@ class Interfaz:
         # def barra de titulo custom, si es posible.
     # Función para crear la barra de título custom
     def barra_titulo(self, ventana):
-
         bgbarra = "#4D4D4D"
 
         # Crear la barra de título
-        barra_titulo = tk.Frame(ventana, bg=bgbarra, relief="raised", bd=0)
+        barra_titulo = tk.Frame(ventana, bg=bgbarra, relief="raised", bd=0, pady=5)
         barra_titulo.grid(row=0, column=0, columnspan=7, sticky="ew")
         
         # Configurar las columnas internas de la barra de título
@@ -80,8 +85,8 @@ class Interfaz:
             print(f"No se pudo cargar el ícono: {e}")
 
         # Etiqueta para el título
-        titulo = tk.Label(barra_titulo, text="Economía Hogar", bg=bgbarra, fg="white")
-        titulo.grid(row=0, column=0, padx=(10, 80))
+        titulo = tk.Label(barra_titulo, text="Economía Hogar", bg=bgbarra, fg="white") #bgbarra
+        titulo.grid(row=0, column=1, sticky="w")  # Título pegado al logo, sin padding horizontal
         
         # Botón minimizar
         btn_minimizar = tk.Button(barra_titulo, text="_", command=self.minimizar, bg=bgbarra, fg="white", bd=0)
@@ -94,11 +99,6 @@ class Interfaz:
         # Botón cerrar
         btn_cerrar = tk.Button(barra_titulo, text="X", command=ventana.destroy, bg=bgbarra, fg="white", bd=0)
         btn_cerrar.grid(row=0, column=6, padx=10)
-        
-
-
-        
-        
 
         # Permitir mover la ventana arrastrando la barra de título
         barra_titulo.bind("<Button-1>", self.detectar_movimiento)
@@ -126,13 +126,14 @@ class Interfaz:
         self.ventana.geometry(f"+{self.ventana.winfo_x() + deltax}+{self.ventana.winfo_y() + deltay}")
 
 # Widgets para mostrar contenido: #
-    def texto(self, alineacion, contenido, row, column, padx, pady):
+    def texto(self, alineacion, contenido, ancho_maximo, row, column, padx, pady):
         etiqueta_texto = tk.Label(
             self.ventana,
             text=contenido,
-            wraplength=200,  # Ajusta el ancho de envoltura del texto para evitar que se desborde.
             justify=alineacion,
-            bg=self.bgcolor
+            wraplength=ancho_maximo ,  # Ajusta el ancho de envoltura del texto para evitar que se desborde.
+            bg=self.bgcolor,
+            font=("Consolas", 14)
             ) 
         etiqueta_texto.grid(row=row, column=column, padx=padx, pady=pady)
         #contenido= str
@@ -179,51 +180,52 @@ class Interfaz:
         self.crear_ventana(400, 750)
 
         # Campos de usuario y contraseña
-        self.texto("left", "Usuario", 2, 0, 0, 10)
+        self.texto("left", "Usuario", 200, 2, 0, 0, 10)
         self.entry_usuario = self.campo_entrada(2, 1, 20, 10)
 
-        self.texto("left", "Contraseña", 4, 0, 0, 10)
+        self.texto("left", "Contraseña", 200, 4, 0, 0, 10)
         self.entry_contrasena = tk.Entry(self.ventana, show='*')
         self.entry_contrasena.grid(row=4, column=1, padx=20, pady=10)
         
-        
+        # Enviamos "usuario" y "contraseña", introducidos en la GUI, a validar en login.py
         def enviar_credenciales():
             usuario = self.entry_usuario.get()
             contrasena = self.entry_contrasena.get()
             verificar_login = login.InicioSesion()
             if verificar_login.validar_credenciales(usuario, contrasena):
+                self.ventana.destroy()
                 self.PantallaPrincipal()
             
-        self.btn_login = self.boton("Iniciar Sesión", 6, 1, 10, 10, enviar_credenciales)
+        self.btn_login = self.boton("Iniciar Sesión", 200, 6, 1, 10, 10, enviar_credenciales)
+        
         self.btn_registro = tk.Button(self.ventana, text="Registrar Usuario")
         self.btn_registro.grid(row=7, column=1, padx=10, pady=10)
         
         
         
-        
-        
 
     def PantallaPrincipal(self):
-        self.crear_ventana(1500, 900)
+        self.crear_ventana(1250, 900)
         
-        return None
+        #Columna 1
+        # llamar def texto de bienvenida
+        self.texto("center", "Comienza a gestionar la economía de tu hogar.\n\nRegistra los gastos e ingresos de cada miembro de tu grupo familiar", 300, 2, 1, 50, 50)
+        #alineacion, contenido, ancho_maximo, row, column, padx, pady
         
         
-
-
-class InterfazPrincipal:
-    def __init__(self):
-      #Columna 1
-      # llamar def texto de bienvenida
-      # llamar listas desplegables
-      # llamar campos para escribir
-      # llamar def Botones
+        
+        # llamar listas desplegables
+        # llamar campos para escribir
+        # llamar def Botones
 
       #Columna 2
       # llamar cuadro resumen registros
       # llamar total_registros
       # llamar grafico
-      return None
+        
+        return None
+    
+      
     
 
 class  InterfazEditarGrupoFamiliar:
