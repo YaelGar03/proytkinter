@@ -208,6 +208,7 @@ class Interfaz:
         self.crear_ventana(1250, 900)
         
         #Columna 1
+        
         # llamar def texto de bienvenida
         self.texto("center", "Comienza a gestionar la economía de tu hogar.\n\nRegistra los gastos e ingresos de cada miembro de tu grupo familiar", 300, 2, 1, 50, 50)
         #alineacion, contenido, ancho_maximo, row, column, padx, pady
@@ -215,13 +216,29 @@ class Interfaz:
         
         
         # llamar listas desplegables
+        self.texto("left", "Selecciona el tipo de registro:", 200, 1, 0, 10, 10)
+        self.lista_desplegable_tipo = self.campo_lista_desplegable()
         # llamar campos para escribir
+        self.texto("left", "Nombre del miembro:", 200, 2, 0, 10, 10)
+        self.campo_nombre = self.campo_entrada(2, 1, 10, 10)
+        self.texto("left", "Cantidad:", 200, 3, 0, 10, 10)
+        self.campo_cantidad = self.campo_entrada(3, 1, 10, 10)
+    
+        self.texto("left", "Fecha (dd/mm/aaaa):", 200, 4, 0, 10, 10)
+        self.campo_fecha = self.campo_entrada(4, 1, 10, 10)
         # llamar def Botones
+        self.boton("Añadir Gasto", 5, 1, 10, 20, self.añadir_gasto)
+        self.boton("Añadir Ingreso", 6, 1, 10, 20, self.añadir_ingreso)
 
       #Columna 2
       # llamar cuadro resumen registros
+        self.texto("left", "Resumen de Registros:", 200, 1, 2, 10, 10)
+        self.resumen_registros(2, 2, 10, 20)
       # llamar total_registros
+        total = self.calcular_total_registros()
+        self.texto("left", f"Total: {total}", 200, 3, 2, 10, 10)
       # llamar grafico
+        self.grafico_resumen()  # falta definir esta función
         
         return None
     
@@ -246,15 +263,41 @@ class  InterfazEditarRegistros:
     class BorrarRegistros:
       def __init__(self):
         # llamar texto
+      self.texto("left", "¿Quieres borrar un registro?", 200, 0, 0, 10)
         # llamar cuadro registros
+      self.cuadro_registros()
         # llamar def Botones
+      self.boton("Borrar", 2, 1, 10, 20, self.borrar_registro)
+      self.boton("Cancelar", 2, 2, 10, 20, self.cancelar)
+        def borrar_registro(self):
+        # Lógica para borrar el registro seleccionado
+        pass
+
+       def cancelar(self):
+        # Lógica para cancelar la acción
+         pass
         return None
 
     class EditarRegistros:
       def __init__(self):
         # llamar texto
+        self.texto("left", "Editar Registro", 200, 0, 0, 10)
         # llamar cuadro registros
+        self.cuadro_registros()
+
         # llamar lista desplegable
+        self.campo_lista_desplegable()
         # llamar campos para escribir
+        self.campo_entrada(2, 1, 10, 10)  # Por ejemplo, para un campo de entrada de texto
         # llamar def Botones
+          self.boton("Guardar", 3, 1, 10, 20, self.guardar_cambios)
+        self.boton("Cancelar", 3, 2, 10, 20, self.cancelar)
+
+      def guardar_cambios(self):
+        # Lógica para guardar los cambios en el registro
+         pass
+
+      def cancelar(self):
+        # Lógica para cancelar la acción
+        pass
         return None
